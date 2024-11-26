@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import { useToast } from "@/hooks/use-toast";
 import { useErrorHandler } from "../hooks/useErrorHandler";
+import { PerformanceMetrics } from "../components/PerformanceMetrics";
 
 export function Home() {
   const { toast } = useToast();
@@ -29,7 +30,7 @@ export function Home() {
         Welcome to the Application
       </h1>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2">
         <Card className="shadow-lg hover:shadow-xl transition-shadow">
           <CardHeader>
             <CardTitle>System Status</CardTitle>
@@ -44,6 +45,7 @@ export function Home() {
             )}
           </CardContent>
         </Card>
+        <PerformanceMetrics />
       </div>
     </div>
   );
