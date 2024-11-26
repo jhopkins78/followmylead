@@ -34,6 +34,22 @@ args = "API Performance Test"
 task = "workflow.run"
 args = "Frontend Performance Test"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Code Lint"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Code Format"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Type Check"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Run Tests"
+
 [[workflows.workflow]]
 name = "Development Server"
 author = "agent"
@@ -76,3 +92,59 @@ task = "packager.installForAll"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "NODE_OPTIONS=--experimental-vm-modules jest tests/performance/lighthouse.test.ts"
+
+[[workflows.workflow]]
+name = "Code Lint"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx eslint . --ext .ts,.tsx --max-warnings 0"
+
+[[workflows.workflow]]
+name = "Code Format"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx prettier --check ."
+
+[[workflows.workflow]]
+name = "Type Check"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx tsc --noEmit"
+
+[[workflows.workflow]]
+name = "Run Tests"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "NODE_OPTIONS=--experimental-vm-modules jest"
