@@ -1,0 +1,42 @@
+ FAIL  tests/performance/lighthouse.test.ts
+  ● Test suite failed to run
+
+    tests/performance/lighthouse.test.ts:19:7 - error TS2322: Type 'RunnerResult | undefined' is not assignable to type 'Result | undefined'.
+      Type 'RunnerResult' is missing the following properties from type 'Result': gatherMode, finalDisplayedUrl, fetchTime, lighthouseVersion, and 8 more.
+
+    19       runnerResult = await lighthouse('http://localhost:5000', options);
+             ~~~~~~~~~~~~
+    tests/performance/lighthouse.test.ts:21:26 - error TS2339: Property 'lhr' does not exist on type 'Result'.
+
+    21       if (!runnerResult?.lhr) {
+                                ~~~
+    tests/performance/lighthouse.test.ts:25:45 - error TS2339: Property 'lhr' does not exist on type 'Result'.
+
+    25       const performanceScore = runnerResult.lhr.categories.performance?.score ?? 0;
+                                                   ~~~
+    tests/performance/lighthouse.test.ts:28:56 - error TS2339: Property 'lhr' does not exist on type 'Result'.
+
+    28       const firstContentfulPaint = Number(runnerResult.lhr.audits['first-contentful-paint']?.numericValue ?? 0);
+                                                              ~~~
+    tests/performance/lighthouse.test.ts:29:53 - error TS2339: Property 'lhr' does not exist on type 'Result'.
+
+    29       const timeToInteractive = Number(runnerResult.lhr.audits['interactive']?.numericValue ?? 0);
+                                                           ~~~
+    tests/performance/lighthouse.test.ts:34:48 - error TS2339: Property 'lhr' does not exist on type 'Result'.
+
+    34         'First Contentful Paint': runnerResult.lhr.audits['first-contentful-paint']?.displayValue ?? 'N/A',
+                                                      ~~~
+    tests/performance/lighthouse.test.ts:35:45 - error TS2339: Property 'lhr' does not exist on type 'Result'.
+
+    35         'Time to Interactive': runnerResult.lhr.audits['interactive']?.displayValue ?? 'N/A',
+                                                   ~~~
+    tests/performance/lighthouse.test.ts:36:37 - error TS2339: Property 'lhr' does not exist on type 'Result'.
+
+    36         'Speed Index': runnerResult.lhr.audits['speed-index']?.displayValue ?? 'N/A'
+                                           ~~~
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        18.459 s
+Ran all test suites matching /tests\/performance\/lighthouse.test.ts/i.

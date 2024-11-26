@@ -1,7 +1,7 @@
 import { describe, it, expect } from '@jest/globals';
-import lighthouse from 'lighthouse';
+import lighthouse, { Result as LHResult } from 'lighthouse';
 import * as chromeLauncher from 'chrome-launcher';
-import type { Flags, Result } from 'lighthouse';
+import type { Flags } from 'lighthouse';
 
 describe('Frontend Performance Tests', () => {
   it('home page should meet performance standards', async () => {
@@ -13,20 +13,23 @@ describe('Frontend Performance Tests', () => {
       onlyCategories: ['performance']
     };
 
-    let runnerResult: Result | undefined;
+    let runnerResult: LHResult;
 
     try {
-      runnerResult = await lighthouse('http://localhost:5000', options);
+      runnerResult = await lighthouse('http://localhost:5000', options) as LHResult;
       
-      if (!runnerResult?.lhr) {
+      if (!runnerResult || !runnerResult.lhr) {
         throw new Error('Lighthouse failed to return results');
       }
 
       const performanceScore = runnerResult.lhr.categories.performance?.score ?? 0;
       const score = performanceScore * 100;
 
-      const firstContentfulPaint = Number(runnerResult.lhr.audits['first-contentful-paint']?.numericValue ?? 0);
-      const timeToInteractive = Number(runnerResult.lhr.audits['interactive']?.numericValue ?? 0);
+      const metrics = {
+        firstContentfulPaint: runnerResult.lhr.audits['first-contentful-paint']?.numericValue,
+        timeToInteractive: runnerResult.lhr.audits['interactive']?.numericValue,
+        speedIndex: runnerResult.lhr.audits['speed-index']?.numericValue
+      };
 
       console.log('Lighthouse Performance Results:');
       console.log(`Performance Score: ${score}`);
@@ -38,8 +41,8 @@ describe('Frontend Performance Tests', () => {
 
       // Performance thresholds
       expect(score).toBeGreaterThan(80);
-      expect(firstContentfulPaint).toBeLessThan(2000);
-      expect(timeToInteractive).toBeLessThan(3500);
+      expect(metrics.firstContentfulPaint).toBeLessThan(2000);
+      expect(metrics.timeToInteractive).toBeLessThan(3500);
     } finally {
       await chrome.kill();
     }
