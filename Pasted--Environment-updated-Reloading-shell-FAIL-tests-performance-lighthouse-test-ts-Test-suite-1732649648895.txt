@@ -1,0 +1,74 @@
+ Environment updated. Reloading shell...
+ FAIL  tests/performance/lighthouse.test.ts
+  ● Test suite failed to run
+
+    tests/performance/lighthouse.test.ts:4:1 - error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+
+    4 describe('Frontend Performance Tests', () => {
+      ~~~~~~~~
+    tests/performance/lighthouse.test.ts:5:3 - error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+
+    5   it('home page should meet performance standards', async () => {
+        ~~
+    tests/performance/lighthouse.test.ts:14:68 - error TS2345: Argument of type '{ logLevel: string; output: string; port: number; onlyCategories: string[]; }' is not assignable to parameter of type 'Flags'.
+      Types of property 'logLevel' are incompatible.
+        Type 'string' is not assignable to type '"info" | "silent" | "error" | "warn" | "verbose" | undefined'.
+
+    14     const runnerResult = await lighthouse('http://localhost:5000', options);
+                                                                          ~~~~~~~
+    tests/performance/lighthouse.test.ts:15:30 - error TS18048: 'runnerResult' is possibly 'undefined'.
+
+    15     const performanceScore = runnerResult.lhr.categories.performance.score * 100;
+                                    ~~~~~~~~~~~~
+    tests/performance/lighthouse.test.ts:15:30 - error TS18047: 'runnerResult.lhr.categories.performance.score' is possibly 'null'.
+
+    15     const performanceScore = runnerResult.lhr.categories.performance.score * 100;
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    tests/performance/lighthouse.test.ts:20:33 - error TS18048: 'runnerResult' is possibly 'undefined'.
+
+    20       'First Contentful Paint': runnerResult.lhr.audits['first-contentful-paint'].displayValue,
+                                       ~~~~~~~~~~~~
+    tests/performance/lighthouse.test.ts:21:30 - error TS18048: 'runnerResult' is possibly 'undefined'.
+
+    21       'Time to Interactive': runnerResult.lhr.audits['interactive'].displayValue,
+                                    ~~~~~~~~~~~~
+    tests/performance/lighthouse.test.ts:22:22 - error TS18048: 'runnerResult' is possibly 'undefined'.
+
+    22       'Speed Index': runnerResult.lhr.audits['speed-index'].displayValue
+                            ~~~~~~~~~~~~
+    tests/performance/lighthouse.test.ts:28:5 - error TS2304: Cannot find name 'expect'.
+
+    28     expect(performanceScore).toBeGreaterThan(80);
+           ~~~~~~
+    tests/performance/lighthouse.test.ts:29:5 - error TS2304: Cannot find name 'expect'.
+
+    29     expect(parseFloat(runnerResult.lhr.audits['first-contentful-paint'].numericValue)).toBeLessThan(2000);
+           ~~~~~~
+    tests/performance/lighthouse.test.ts:29:23 - error TS18048: 'runnerResult' is possibly 'undefined'.
+
+    29     expect(parseFloat(runnerResult.lhr.audits['first-contentful-paint'].numericValue)).toBeLessThan(2000);
+                             ~~~~~~~~~~~~
+    tests/performance/lighthouse.test.ts:29:23 - error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+
+    29     expect(parseFloat(runnerResult.lhr.audits['first-contentful-paint'].numericValue)).toBeLessThan(2000);
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    tests/performance/lighthouse.test.ts:30:5 - error TS2304: Cannot find name 'expect'.
+
+    30     expect(parseFloat(runnerResult.lhr.audits['interactive'].numericValue)).toBeLessThan(3500);
+           ~~~~~~
+    tests/performance/lighthouse.test.ts:30:23 - error TS18048: 'runnerResult' is possibly 'undefined'.
+
+    30     expect(parseFloat(runnerResult.lhr.audits['interactive'].numericValue)).toBeLessThan(3500);
+                             ~~~~~~~~~~~~
+    tests/performance/lighthouse.test.ts:30:23 - error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'string'.
+      Type 'undefined' is not assignable to type 'string'.
+
+    30     expect(parseFloat(runnerResult.lhr.audits['interactive'].numericValue)).toBeLessThan(3500);
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        15.71 s
+Ran all test suites matching /tests\/performance\/lighthouse.test.ts/i.

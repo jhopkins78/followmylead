@@ -1,3 +1,4 @@
+import { describe, it, expect } from '@jest/globals';
 import autocannon from 'autocannon';
 
 describe('API Performance Tests', () => {
