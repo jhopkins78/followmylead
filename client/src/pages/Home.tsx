@@ -25,7 +25,7 @@ export function Home() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+      <h1 className="text-4xl font-bold mb-8 text-primary">
         Welcome to the Application
       </h1>
 
