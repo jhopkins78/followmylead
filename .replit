@@ -61,7 +61,7 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "NODE_OPTIONS=--experimental-vm-modules npx jest tests/performance/api.test.ts --config jest.config.js"
+args = "NODE_OPTIONS=--experimental-vm-modules jest tests/performance/api.test.ts"
 
 [[workflows.workflow]]
 name = "Frontend Performance Test"
@@ -75,4 +75,4 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "NODE_OPTIONS=--experimental-vm-modules npx jest tests/performance/lighthouse.test.ts --config jest.config.js"
+args = "NODE_OPTIONS=--experimental-vm-modules jest tests/performance/lighthouse.test.ts"
